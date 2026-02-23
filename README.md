@@ -1,2 +1,2 @@
-# codedex-chat-app
+# Chat-app
 This repository contains the chat application developed as part of the in-house project tutorial.
