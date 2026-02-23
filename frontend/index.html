@@ -15,60 +15,63 @@
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <style>
       .chat-window {
-        min-height: 450px;
-        max-height: 450px;
-        overflow-y: scroll;
-      }
-      body {
-        background: linear-gradient(180deg, #ffb7b7 0%, #727272 100%),
-          radial-gradient(60.91% 100% at 50% 0%, #ffd1d1 0%, #260000 100%),
-          linear-gradient(238.72deg, #ffdddd 0%, #720066 100%),
-          linear-gradient(127.43deg, #00ffff 0%, #ff4444 100%),
-          radial-gradient(100.22% 100% at 70.57% 0%, #ff0000 0%, #00ffe0 100%),
-          linear-gradient(127.43deg, #b7d500 0%, #3300ff 100%);
-        background-blend-mode: screen, overlay, hard-light, color-burn,
-          color-dodge, normal;
-        overflow: hidden;
-      }
-      .chat-window::-webkit-scrollbar {
-        display: none;
+        min-height: 420px;
+        max-height: 420px;
+        overflow-y: auto;
       }
 
-      .chat-window {
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
+      .chat-window::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .chat-window::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .chat-window::-webkit-scrollbar-thumb {
+        background-color: rgba(156, 163, 175, 0.55);
+        border-radius: 9999px;
       }
     </style>
   </head>
 
-  <body class="flex justify-center mt-14 h-screen">
-    <div class="w-full max-w-lg">
-      <div class="bg-gray-600 text-white rounded-t-lg shadow-md p-6">
-        <h2 class="text-xl font-semibold mb-4">Chat Window</h2>
+  <body class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 p-4 sm:p-8">
+    <div class="mx-auto w-full max-w-3xl">
+      <div class="overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <header class="border-b border-gray-200 bg-gray-900 px-6 py-4 text-white">
+          <p class="text-sm uppercase tracking-wide text-gray-300">Realtime Room</p>
+          <h2 class="text-2xl font-semibold">Socket Chat</h2>
+        </header>
 
-        <div class="flex flex-col space-y-4 chat-window"></div>
-      </div>
+        <main class="chat-window bg-gray-50 px-6 py-5">
+          <div class="messages flex flex-col gap-3"></div>
+        </main>
 
-      <div class="bg-gray-600 rounded-b-lg shadow-md p-5">
-        <h1 class="text-2xl text-white font-semibold mb-4"></h1>
-
-        <form class="chat">
-          <div class="flex items-center mb-4">
-            <i class="fas fa-comment mr-2"></i>
-            <input
-              type="text"
-              class="border border-gray-300 rounded-lg px-4 py-2 flex-grow"
-              placeholder="Type your message here"
-              id="message"
-            />
-
-            <button
-              class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg ml-2"
-            >
-              Send
-            </button>
+        <footer class="border-t border-gray-200 bg-white px-6 py-4">
+          <div class="mb-3 flex items-center justify-between">
+            <p class="text-sm text-gray-500">Logged in as</p>
+            <h1 class="username text-sm font-semibold text-gray-800"></h1>
           </div>
-        </form>
+
+          <form class="chat">
+            <div class="flex items-center gap-2">
+              <input
+                type="text"
+                class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-700 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+                placeholder="Write a message..."
+                id="message"
+                autocomplete="off"
+              />
+
+              <button
+                class="rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-700"
+                type="submit"
+              >
+                Send
+              </button>
+            </div>
+          </form>
+        </footer>
       </div>
     </div>
     <script src="script.js"></script>
