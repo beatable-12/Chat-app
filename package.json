@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node backend/server-starter.js",
     "server": "nodemon backend/server-starter.js",
     "serve": "nodemon backend/server-starter.js",
     "completed": "node backend/server-completed.js"

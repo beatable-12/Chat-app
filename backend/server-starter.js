@@ -2,6 +2,8 @@
 import { uniqueNamesGenerator, colors, names } from "unique-names-generator";
 import express from "express";
 import http from "http";
+import path from "path";
+import { fileURLToPath } from "url";
 
 // import the socket.io library
 import { Server } from "socket.io";
@@ -10,6 +12,10 @@ import { Server } from "socket.io";
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendDir = path.resolve(__dirname, "../frontend");
+const PORT = Number(process.env.PORT) || 3000;
 
 // create the chat history array for storing messages
 const chatHistory = [];
@@ -48,16 +54,16 @@ io.on("connection", function callback(socket) {
 
 // Boilerplate code as well as Bonus section
 // HTTP server setup to serve the page assets
-app.use(express.static(process.cwd() + "/frontend"));
+app.use(express.static(frontendDir));
 
 // HTTP server setup to serve the page at / route
 app.get("/", (req, res) => {
-  return res.sendFile(process.cwd() + "/frontend/index.html");
+  return res.sendFile(path.join(frontendDir, "index.html"));
 });
 
 // start the HTTP server to serve the page
-server.listen(3000, () => {
-  console.log("listening on http://localhost:3000");
+server.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
 });
 
 // helper functions
