@@ -33,7 +33,7 @@ async function sendMessage(message) {
 function render(chatHistory) {
   if (!Array.isArray(chatHistory) || chatHistory.length === 0) {
     messagesContainer.innerHTML =
-      '<p class="text-center text-sm text-gray-400">No messages yet. Start the conversation 👋</p>';
+      '<div class="rounded-2xl border border-dashed border-gray-300 bg-white/80 px-4 py-8 text-center text-sm text-gray-500">No messages yet. Start the conversation 👋</div>';
     return;
   }
 
@@ -43,7 +43,7 @@ function render(chatHistory) {
     })
     .join("\n");
   messagesContainer.innerHTML = html;
-  chatWindow.scrollTop = 0;
+  chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
 function updateUsername(username) {
@@ -57,9 +57,11 @@ function messageTemplate(username, message, isCurrentUser) {
   const bubbleClass = isCurrentUser
     ? "bg-indigo-600 text-white"
     : "bg-white text-gray-800 border border-gray-200";
+  const usernameClass = isCurrentUser ? "text-indigo-200" : "text-gray-500";
+  const alignmentClass = isCurrentUser ? "text-right" : "text-left";
 
   return `<div class="flex flex-col ${wrapperClass}">
-      <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-gray-500">${safeUsername}</p>
+      <p class="mb-1 text-[11px] font-semibold uppercase tracking-wide ${usernameClass} ${alignmentClass}">${safeUsername}</p>
       <div class="max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm ${bubbleClass}">
         ${safeMessage}
       </div>

@@ -14,10 +14,15 @@
     ></script>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <style>
+      :root {
+        color-scheme: light;
+      }
+
       .chat-window {
-        min-height: 420px;
-        max-height: 420px;
+        min-height: 480px;
+        max-height: 480px;
         overflow-y: auto;
+        scroll-behavior: smooth;
       }
 
       .chat-window::-webkit-scrollbar {
@@ -32,39 +37,53 @@
         background-color: rgba(156, 163, 175, 0.55);
         border-radius: 9999px;
       }
+
+      .bg-grid {
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(255, 255, 255, 0.22) 1px,
+          transparent 0
+        );
+        background-size: 24px 24px;
+      }
     </style>
   </head>
 
-  <body class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 p-4 sm:p-8">
-    <div class="mx-auto w-full max-w-3xl">
-      <div class="overflow-hidden rounded-2xl bg-white shadow-2xl">
-        <header class="border-b border-gray-200 bg-gray-900 px-6 py-4 text-white">
-          <p class="text-sm uppercase tracking-wide text-gray-300">Realtime Room</p>
-          <h2 class="text-2xl font-semibold">Socket Chat</h2>
+  <body class="bg-grid min-h-screen bg-gradient-to-br from-indigo-700 via-violet-700 to-fuchsia-600 p-4 sm:p-8">
+    <div class="mx-auto flex min-h-[calc(100vh-2rem)] w-full max-w-3xl items-center sm:min-h-[calc(100vh-4rem)]">
+      <div class="w-full overflow-hidden rounded-3xl border border-white/40 bg-white/95 shadow-2xl backdrop-blur">
+        <header class="border-b border-gray-200 bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-5 text-white">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs uppercase tracking-[0.2em] text-gray-300">Realtime Room</p>
+              <h2 class="text-2xl font-semibold leading-tight">Socket Chat</h2>
+            </div>
+            <span class="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 ring-1 ring-emerald-400/30">Online</span>
+          </div>
         </header>
 
-        <main class="chat-window bg-gray-50 px-6 py-5">
+        <main class="chat-window bg-gray-50/80 px-6 py-5">
           <div class="messages flex flex-col gap-3"></div>
         </main>
 
         <footer class="border-t border-gray-200 bg-white px-6 py-4">
           <div class="mb-3 flex items-center justify-between">
-            <p class="text-sm text-gray-500">Logged in as</p>
-            <h1 class="username text-sm font-semibold text-gray-800"></h1>
+            <p class="text-xs uppercase tracking-wider text-gray-500">Logged in as</p>
+            <h1 class="username rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-100"></h1>
           </div>
 
           <form class="chat">
             <div class="flex items-center gap-2">
               <input
                 type="text"
-                class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-700 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+                class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-700 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
                 placeholder="Write a message..."
                 id="message"
                 autocomplete="off"
               />
 
               <button
-                class="rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-700"
+                class="rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300"
                 type="submit"
               >
                 Send
